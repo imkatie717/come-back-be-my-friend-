@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>🌸可以回来做我的好鹏友嘛？！🌸</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  min-height:100vh;
+  background:#ffe6ef;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:"Microsoft Yahei",sans-serif;
+}
+.box{
+  background:#fff;
+  padding:40px 60px;
+  border-radius:20px;
+  box-shadow:0 8px 24px #00000022;
+  text-align:center;
+}
+h1{
+  color:#ff6699;
+  margin-bottom:30px;
+  font-size:28px;
+}
+.tip{
+  color:#888;
+  margin-bottom:30px;
+}
+.btn-wrap{
+  display:flex;
+  gap:24px;
+  justify-content:center;
+}
+button{
+  border:none;
+  padding:12px 32px;
+  font-size:20px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.2s;
+}
+.btn-yes{
+  background:#ff6688;
+  color:white;
+}
+.btn-no{
+  background:#cccccc;
+  color:#333;
+}
+.msg{
+  margin-top:24px;
+  font-size:20px;
+  color:#ff4477;
+  display:none;
+}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>🌸 可以回来做我的好鹏友嘛？！ 🌸</h1>
+  <div class="tip">系统检测到：对方已经担心到开始写网页了。</div>
+  <div class="btn-wrap">
+    <button class="btn-yes" data-val="愿意 ❤">愿意 ❤</button>
+    <button class="btn-no" data-val="不要 👂">不要 👂</button>
+  </div>
+  <div class="msg"></div>
+</div>
+
+<script>
+
+const FORMSUBMIT_URL = "https://formsubmit.co/2057698857@qq.com";
+// =============================================================
+
+const yesBtn = document.querySelector('.btn-yes');
+const noBtn = document.querySelector('.btn-no');
+const msgDom = document.querySelector('.msg');
+
+async function sendResult(selectText){
+  const payload = {
+    selection: selectText,
+    time: new Date().toLocaleString()
+  };
+  try{
+    await fetch(FORMSUBMIT_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    });
+  }catch(e){
+    console.error(e);
+  }
+}
+
+yesBtn.onclick = async ()=>{
+  await sendResult("愿意 ❤");
+  msgDom.style.display="block";
+  msgDom.innerText="太好了🥰！我是好鹏友！";
+};
+
+noBtn.onclick = async ()=>{
+  await sendResult("不要 😛");
+  msgDom.style.display="block";
+  msgDom.innerText="呜呜😭，那你当我的树洞朋友";
+};
+</script>
+</body>
+</html>
